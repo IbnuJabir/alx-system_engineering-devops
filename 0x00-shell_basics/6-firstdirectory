@@ -1,0 +1,3 @@
+#!/bin/bash
+cd file /tmp/my_first_directory/
+/tmp/my_first_directory/
