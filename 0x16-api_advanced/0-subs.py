@@ -1,13 +1,17 @@
 #!/usr/bin/python3
-"""This python module contains a script that interacts with the Reddit API"""
-from requests import get
+"""Module for task 0"""
 
 
 def number_of_subscribers(subreddit):
-    """Queries a reddit api and returns the number of subscribers for
-    a given subredit"""
-    header = {"User-Agent": "0x16.api.advanced.project:eleccrazy"}
-    res = get("https://www.reddit.com/r/{}/about.json".format(subreddit),
-              headers=header, allow_redirects=False)
-    code = res.status_code
-    return 0 if code == 404 else res.json().get("data").get("subscribers")
+    """Queries the Reddit API and returns the number of subscribers
+    to the subreddit"""
+    import requests
+
+    sub_info = requests.get("https://www.reddit.com/r/{}/about.json"
+                            .format(subreddit),
+                            headers={"User-Agent": "My-User-Agent"},
+                            allow_redirects=False)
+    if sub_info.status_code >= 300:
+        return 0
+
+    return sub_info.json().get("data").get("subscribers")
